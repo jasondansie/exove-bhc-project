@@ -1,5 +1,8 @@
  questionare
  {
+    "question": "",
+    "type": ""
+
     "surveylinkid": "",
  }
 
@@ -31,9 +34,9 @@ collection of surveys
  {
 
  }
- 
+
  collection of surveyanswer
  {
-
+    
  }
 
