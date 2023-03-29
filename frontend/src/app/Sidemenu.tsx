@@ -24,6 +24,21 @@ const Sidemenu = (props: Iprops) => {
                             link="/home"
                          />
                     </li>
+                    <li>
+                        <MenuItem
+                            name="Add Question"
+                            icon="fa fa-clock-o"
+                            link="/addquestion"
+                         />
+                    </li>
+                    <li>
+                        <MenuItem
+                            name="Create Survey"
+                            icon="fa fa-clock-o"
+                            link="/createsurvey"
+                         />
+                    </li>
+                    
                     
                 </ul>
 

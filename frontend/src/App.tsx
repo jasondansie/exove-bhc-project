@@ -1,6 +1,8 @@
 import React from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import './App.css';
+import AddQuestion from './app/AddQuestion';
+import CreateSurvey from './app/CreateSurvey';
 import Home from './app/Home';
 import Info from './app/Info';
 import Logout from './app/Logout';
@@ -17,6 +19,8 @@ function App() {
           <Route path='/home' element={<Home />}> </Route>
           <Route path='/myprofile' element={<MyProfile />}> </Route>
           <Route path='/info' element={<Info />}></Route>
+          <Route path='/createsurvey' element={<CreateSurvey />}></Route>
+          <Route path='/addquestion' element={<AddQuestion />}></Route>
           <Route path='/logout' element={<Logout />}></Route>
         </Route>  
       </Routes>

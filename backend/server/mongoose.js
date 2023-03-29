@@ -71,13 +71,15 @@ let questions = [];
     }
   });
   
-  app.get("/addquestions", async (req, res) => {
+  app.post("/addquestion", async (req, res) => {
+    console.log("question: ",req.body.question);
     try {
       const question = new Question({
-        question: 'Hello how are you',
-        type: 'scale',
-      });
-      
+        question: req.body.question,
+        type: req.body.type,
+        // add any other necessary fields here
+     });
+           
       if (question.save()) { 
         res.status(200).json({
           status: 200,
