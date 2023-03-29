@@ -1,11 +1,11 @@
 const express = require("express");
-const Question = require("./models/Survey");
 const { MongoClient, ServerApiVersion } = require('mongodb');
 const mongoose = require("mongoose");
 const cors = require("cors");
 const app = express();
 const config = require("./config");
 const Survey = require("./models/Survey");
+const Question = require("./models/Question");
 
 
 const dbUrl = config.dbUrl;
@@ -13,17 +13,27 @@ const dbUrl = config.dbUrl;
 require('dotenv').config();
 
 app.use(cors());
-
+app.use(express.json());
 
 mongoose.connect(dbUrl);
 
-  app.get("/list", async (req, res) => {
+let questions = [];
+
+  app.get("/list/surveys", async (req, res) => {
     try {
       let survey = await Survey.find();
-      res.status(200).json({
-        status: 200,
-        data: survey,
+      res.status(200).json(survey);
+    } catch (err) {
+      res.status(400).json({
+        status: 400,
+        message: err.message,
       });
+    }
+  });
+  app.get("/list/questions", async (req, res) => {
+    try {
+      questions = await Question.find();
+      res.status(200).json(questions);
     } catch (err) {
       res.status(400).json({
         status: 400,
@@ -34,26 +44,46 @@ mongoose.connect(dbUrl);
 
   app.get("/fillSurvey", async (req, res) => {
     try {
+      questions2 = [];
+      questionslist = await Question.find();
+      questionslist.map((item) => {
+        questions2.push(item);
+      })
+
+      console.log("questions: ",questions2);
       const survey = new Survey({
         name: 'Example Survey',
         description: 'This is an example survey.',
-        questions: [
-          {
-            question: 'What is your favorite color?',
-            type: 'text',
-          },
-          {
-            question: 'What is your favorite animal?',
-            type: 'text',
-          },
-        ],
+        questions: questions2,
       });
       
       if (survey.save()) {
-        console.log("Saved successfully");
-      } else {
-        console.log("Data not saved");
+        res.status(200).json({
+          status: 200,
+          message: "Survey saved successfully",
+        })
       }
+    } catch (err) {
+      res.status(400).json({
+        status: 400,
+        message: err.message,
+      });
+    }
+  });
+  
+  app.get("/addquestions", async (req, res) => {
+    try {
+      const question = new Question({
+        question: 'Hello how are you',
+        type: 'scale',
+      });
+      
+      if (question.save()) { 
+        res.status(200).json({
+          status: 200,
+          message: "question saved successfully",
+        })
+      } 
     } catch (err) {
       res.status(400).json({
         status: 400,
