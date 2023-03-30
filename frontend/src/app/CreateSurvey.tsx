@@ -69,7 +69,6 @@ const CreateSurvey: React.FC = () => {
     }
   };
 
-
   const submitHandler = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
     console.log("checkedBoxes: ", checkedBoxes);
@@ -79,8 +78,6 @@ const CreateSurvey: React.FC = () => {
 
     // console.log("submitted", formData);
   }
-
-
 
   return (
     <div>
@@ -108,7 +105,6 @@ const CreateSurvey: React.FC = () => {
             </div>
             <button type="submit">Submit</button>
           </form>
-
         </div>
       </div>
     </div>
